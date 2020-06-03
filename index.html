@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+  <div class="game" style="text-align: center; margin-top: 10%">
+    <div class="selection">
+      <button class="rock btn">Rock</button>
+      <button class="paper btn" style="margin: 0 1rem">Paper</button>
+      <button class="scissors btn">Scissors</button>
+    </div>
+    <div class="score center-align">
+      <h2 class="playerscore"></h1>
+      <h2 class="computerscore"></h1>
+    </div>
+    <div>
+      <h1 class="winner"></h1>
+    </div>
+  </div>
+  <script>
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    function computerPlay() {
+
+      compTurn = getRandomInt(3);
+      if (compTurn === 0) {
+        compTurn = "ROCK"
+     } else if (compTurn === 1) {
+        compTurn = "PAPER"
+     } else if (compTurn === 2) {
+        compTurn = "SCISSORS" 
+     }
+     return compTurn
+    }
+
+    function userPlay() { 
+
+        const rock = document.querySelector('.rock');
+        const paper = document.querySelector('.paper')
+        const scissors = document.querySelector('.scissors')
+
+        rock.addEventListener('click', function(){
+            userTurn = "ROCK";
+            playRound();
+                
+        })
+
+        paper.addEventListener('click', function(){
+            userTurn = "PAPER";
+            playRound();
+        })
+
+        scissors.addEventListener('click', function(){
+            userTurn = "SCISSORS";
+            playRound();     
+        })
+    }
+  
+    function playRound() {
+      
+      computerPlay(); 
+
+      let playerScore = window.document.querySelector('.playerscore');
+      let computerScore = window.document.querySelector('.computerscore');
+ 
+      let playerSelection = userTurn; 
+      let computerSelection = compTurn;
+
+      switch (computerSelection + playerSelection) {
+        case ("ROCKROCK"): 
+        alert("Computer: Rock - Draw! play again.")
+        break; 
+
+        case ("ROCKPAPER"):
+        alert("Computer: Rock - You win! Paper beats rock.")
+        userScore = ++userScore
+        break; 
+
+        case ("ROCKSCISSORS"):
+        alert("Computer: Rock - You lose! Rock beats scissors.")
+        compScore = ++compScore
+        break; 
+
+        case ("PAPERPAPER"):
+        alert("Computer: Paper -  Draw! Play again.")
+        break; 
+
+        case ("PAPERSCISSORS"):
+        alert("Computer: Paper - You win! Scissors beats paper.")
+        userScore = ++userScore
+        break; 
+
+        case ("PAPERROCK"):
+        alert("Computer: Paper - You lose! Paper beats rock.")
+        compScore = ++compScore
+        break; 
+
+        case ("SCISSORSSCISSORS"):
+        alert("Computer: Scissors - Draw! Play again.")
+        break; 
+
+        case ("SCISSORSPAPER"):
+        alert("Computer: Scissors - You lose! Scissors beats paper.")
+        compScore = ++compScore
+        break; 
+        
+        case ("SCISSORSROCK"):
+        alert("Computer: Scissors - You win! Rock beats scissors.")
+        userScore = ++userScore
+        break; 
+      } if (userScore == 5) {
+            alert("You have won the tournament! :)");
+            userScore = 0;
+            compScore = 0; 
+      } else if (compScore == 5) {
+            alert("You have lost the tournament! :(");
+            userScore = 0;
+            compScore = 0; 
+      }
+      
+      console.log(userScore)
+      console.log(compScore)
+      playerScore.textContent = "User: " + userScore; 
+      computerScore.textContent = "Computer: " + compScore; 
+
+
+    }
+
+
+    let userTurn
+    let compTurn
+
+    let userScore = 0;
+    let compScore = 0; 
+
+    userPlay();
+
+  </script>
+</body>
+</html>
